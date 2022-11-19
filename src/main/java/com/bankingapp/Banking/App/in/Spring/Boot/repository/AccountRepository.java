@@ -1,0 +1,9 @@
+package com.bankingapp.Banking.App.in.Spring.Boot.repository;
+
+import com.bankingapp.Banking.App.in.Spring.Boot.model.Account;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface AccountRepository extends JpaRepository<Account, Long> {
+}
