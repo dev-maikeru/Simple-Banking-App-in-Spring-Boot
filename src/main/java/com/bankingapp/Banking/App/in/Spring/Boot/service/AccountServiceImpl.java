@@ -1,21 +1,23 @@
 package com.bankingapp.Banking.App.in.Spring.Boot.service;
 
-import com.bankingapp.Banking.App.in.Spring.Boot.dto.AccountDtoRequest;
 import com.bankingapp.Banking.App.in.Spring.Boot.exception.RecordNotFoundException;
 import com.bankingapp.Banking.App.in.Spring.Boot.model.Account;
-import com.bankingapp.Banking.App.in.Spring.Boot.model.InterestAccount;
 import com.bankingapp.Banking.App.in.Spring.Boot.repository.AccountRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 public class AccountServiceImpl implements AccountService {
-    @Autowired
-    private AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
+
+    public AccountServiceImpl(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
 
     @Override
+    @Transactional
     public Account saveAccount(Account account) {
         return accountRepository.save(account);
     }
@@ -32,9 +34,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Transactional
     public void deleteAccount(Long accId) throws RecordNotFoundException {
-        Account account = accountRepository.findById(accId)
-                .orElseThrow(() -> new RecordNotFoundException("Account not found"));
-        accountRepository.delete(account);
+        if (!accountRepository.existsById(accId)) {
+            throw new RecordNotFoundException("Account not found");
+        }
+        accountRepository.deleteById(accId);
     }
 }
