@@ -37,17 +37,17 @@ public abstract class Account {
     private String acctNumber;
 
     @Column
-    private double balance;
+    private Double balance;
 
     @Column
-    private double minimumBalance;
+    private Double minimumBalance;
 
     @Column
-    private double penalty;
+    private Double penalty;
 
     @Column
-    private double transactionCharge;
+    private Double transactionCharge;
 
     @Column
-    private double interestCharge;
+    private Double interestCharge;
 }
