@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 
 @Entity
 public class CheckingAccount extends Account {
-    CheckingAccount() {
+    public CheckingAccount() {
         setAcctNumber(AccountUtils.generateAccountNumber());
         setBalance(100d);
         setMinimumBalance(100d);

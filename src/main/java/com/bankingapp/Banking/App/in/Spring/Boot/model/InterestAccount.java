@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 
 @Entity
 public class InterestAccount extends Account {
-    InterestAccount() {
+    public InterestAccount() {
         setAcctNumber(AccountUtils.generateAccountNumber());
         setInterestCharge(.03d);
     }
